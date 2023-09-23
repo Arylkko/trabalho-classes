@@ -10,49 +10,53 @@
 
 <body>
 
-    <button> teste </button>
-    <script>
-        document.querySelector('#turma1').addEventListener('click', imprimir)
+    <button id="turma1"> Imprimir turma 1 </button>
+    <button id="turma2"> Imprimir turma 2 </button>
+    <div id="impressao">
 
-        class pessoa {
+    </div>
+    <script>
+        document.querySelector('#turma1').addEventListener('click', () => turma1.imprimeDados());
+        document.querySelector('#turma2').addEventListener('click', () => turma2.imprimeDados());
+
+        class Pessoa {
             constructor(cpf, nome) {
                 this.cpf = cpf;
                 this.nome = nome;
             }
         }
 
-        class professor extends pessoa {
+        class Professor extends Pessoa {
             constructor(cpf, nome, area, telefone) {
-                super(cpf);
-                super(nome);
+                super(cpf, nome);
                 this.area = area;
                 this.telefone = telefone;
             }
         }
 
-        class aluno extends pessoa {
+        class Aluno extends Pessoa {
             constructor(cpf, nome, matricula) {
-                super(cpf);
-                super(nome);
+                super(cpf, nome);
                 this.matricula = matricula;
             }
         }
 
-        class turma {
+        class Turma {
             constructor(professor, alunos, identificacao) {
                 this.professor = professor;
                 this.alunos = alunos;
+                this.identificacao = identificacao;
             }
 
             imprimeDados() {
-                let impressao = 'Turma ${this.identificacao}<br>';
-                impressao += 'Professor: ${this.professor.nome }, área: ${this.professor.area }<br>';
+                let impressao = `Turma ${this.identificacao}<br>`;
+                impressao += `Professor: ${this.professor.nome}, área: ${this.professor.area}<br>`;
                 impressao += 'Alunos: <ul>';
-                for (i = 0; i < turma.aluno.length; i++) {
-                    impressao += '<li> ${this.turma.aluno[i]} </li>';
+                for (let i = 0; i < this.alunos.length; i++) {
+                    impressao += `<li>${this.alunos[i].nome}</li>`;
                 }
                 impressao += '</ul>';
-                impressao = document.getElementById('#impressao').innerHTML;
+                document.getElementById('impressao').innerHTML = impressao;
             }
         }
 
@@ -70,3 +74,4 @@
         let turma2 = new Turma(professor2, [aluno3, aluno4, aluno5, aluno6], "Turma de Ciências");
     </script>
 </body>
+</html>
